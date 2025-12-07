@@ -21,10 +21,10 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
 
-// App ID (နာမည်တစ်ခုခု ပေးထားလို့ရပါတယ်)
+// App ID
 const appId = 'cyber-archive-v1';
 
-// TypeScript Interfaces (Vercel မှာ Error မတက်အောင် Type သတ်မှတ်ခြင်း)
+// TypeScript Interfaces
 interface ArchiveItem {
   id: string;
   name: string;
@@ -76,7 +76,6 @@ export default function App() {
         ...doc.data()
       } as ArchiveItem));
       
-      // Sort manually
       fetchedItems.sort((a, b) => (b.createdAt?.seconds || 0) - (a.createdAt?.seconds || 0));
       setItems(fetchedItems);
     }, (err) => {
@@ -122,14 +121,16 @@ export default function App() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!user) return; // Add check for user
+    if (!user) return;
 
     if (!name || !email || !file) {
       setError('အချက်အလက်မပြည့်စုံပါ။');
       return;
     }
-    if (!email.endsWith('.edu')) {
-      setError('ဝင်ခွင့်ငြင်းပယ်သည်: .edu မေးလ်သာ အသုံးပြုပါ။');
+    
+    // Updated Logic: Allows both .edu AND .deu
+    if (!email.endsWith('.edu') && !email.endsWith('.deu')) {
+      setError('ဝင်ခွင့်ငြင်းပယ်သည်: .edu သို့မဟုတ် .deu မေးလ်သာ အသုံးပြုပါ။');
       return;
     }
 
@@ -147,7 +148,6 @@ export default function App() {
         createdAt: serverTimestamp()
       });
 
-      // Reset Form
       setName('');
       setEmail('');
       setFile(null);
@@ -208,7 +208,8 @@ export default function App() {
       </div>
       <div className="fixed inset-0 z-0 pointer-events-none bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-10"></div>
       
-      <div className="relative z-10 container mx-auto p-4 max-w-4xl">
+      {/* Container Width Changed: max-w-4xl -> max-w-7xl for wider layout */}
+      <div className="relative z-10 container mx-auto p-4 max-w-7xl">
         
         {/* Header */}
         <header className="mb-8 border-b-2 border-cyan-800 pb-4 flex items-center justify-between">
