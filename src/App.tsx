@@ -208,8 +208,8 @@ export default function App() {
       </div>
       <div className="fixed inset-0 z-0 pointer-events-none bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-10"></div>
       
-      {/* Container Width Changed: max-w-4xl -> max-w-7xl for wider layout */}
-      <div className="relative z-10 container mx-auto p-4 max-w-7xl">
+      {/* Full Width Layout Change: Removed 'container', 'mx-auto', 'max-w-7xl' and added 'w-full' */}
+      <div className="relative z-10 w-full p-4 md:p-8">
         
         {/* Header */}
         <header className="mb-8 border-b-2 border-cyan-800 pb-4 flex items-center justify-between">
