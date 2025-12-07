@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { initializeApp } from 'firebase/app';
-import { getAuth, signInAnonymously, onAuthStateChanged, User } from 'firebase/auth';
+import { getAuth, signInAnonymously, onAuthStateChanged, type User } from 'firebase/auth';
 import { getFirestore, collection, addDoc, onSnapshot, query, deleteDoc, doc, serverTimestamp } from 'firebase/firestore';
 import { Upload, FileText, Copy, Trash2, Download, Terminal, Cpu, ShieldCheck, AlertTriangle } from 'lucide-react';
 
